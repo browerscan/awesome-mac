@@ -5,6 +5,7 @@
 # Project name (will create: https://your-project.pages.dev)
 name = "awesome-mac"
 compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
 
 # Environment variable for account ID (set in CI/CD or local env)
 # CLOUDFLARE_ACCOUNT_ID = "your-account-id"
@@ -25,10 +26,6 @@ vars = { NODE_ENV = "production" }
 # Preview environment variables
 [env.preview]
 vars = { NODE_ENV = "development" }
-
-# Compatibility flags for Next.js
-[compatibility_flags]
-nodejs_compat = true
 
 # Rules for routes (optional, for advanced routing)
 # [[rules]]
