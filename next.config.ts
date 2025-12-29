@@ -4,6 +4,9 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 const nextConfig: NextConfig = {
+  // Enable standalone output for Cloudflare deployment
+  output: 'standalone',
+
   // Add trailing slash to help with routing
   trailingSlash: false,
 

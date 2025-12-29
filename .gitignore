@@ -17,6 +17,7 @@ public/media/
 wrangler.toml
 .wrangler/
 .cloudflare/
+.open-next/
 
 # OS
 .DS_Store

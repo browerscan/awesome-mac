@@ -14,7 +14,7 @@
     "build:web": "npm run build:data && next build",
     "build:prod": "npm run build:data && npm run build && STANDALONE_OUTPUT=true next build",
     "build:docker": "npm run build:data && STANDALONE_OUTPUT=true next build",
-    "build:cloudflare": "npm run build:data && CLOUDFLARE_PAGES=true next build",
+    "build:cloudflare": "npm run build:data && next build && npx opennextjs-cloudflare build --skipNextBuild",
     "start:web": "next start",
     "start:prod": "NODE_ENV=production next start",
     "create:ast": "node build/ast.mjs",
@@ -86,6 +86,7 @@
   "devDependencies": {
     "@eslint/compat": "2.0.0",
     "@eslint/eslintrc": "3.3.3",
+    "@opennextjs/cloudflare": "1.14.7",
     "@playwright/test": "1.57.0",
     "@tailwindcss/typography": "^0.5.19",
     "@testing-library/dom": "10.4.0",

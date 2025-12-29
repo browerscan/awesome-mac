@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { siteConfig } from '@/lib/seo';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const alt = 'Awesome Mac Apps - Best macOS Applications';
 export const size = {
   width: 1200,
