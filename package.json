@@ -114,6 +114,7 @@
     "to-vfile": "^7.2.3",
     "typescript": "5.9.3",
     "unist-util-visit": "5.0.0",
-    "vitest": "4.0.16"
+    "vitest": "4.0.16",
+    "wrangler": "4.54.0"
   }
 }
