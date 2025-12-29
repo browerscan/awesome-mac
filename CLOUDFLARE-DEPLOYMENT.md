@@ -1,171 +1,98 @@
-# Cloudflare Pages Deployment Guide
+# Cloudflare Pages 部署指南
 
-## Prerequisites
+## 方式一：通过 Cloudflare Dashboard（推荐）
 
-### 1. Fork the Repository
+### 1. 创建 Cloudflare Pages 项目
 
-1. Visit: https://github.com/jaywcjlove/awesome-mac
-2. Click **Fork** button (top right)
-3. Select your account (`browerscan`) as destination
+1. 访问: https://dash.cloudflare.com
+2. 进入 **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**
+3. 选择 GitHub 上的 `browerscan/awesome-mac` 仓库
 
-### 2. Create Cloudflare API Token
+### 2. 配置构建设置
 
-1. Visit: https://dash.cloudflare.com/profile/api-tokens
-2. Click **Create Token**
-3. Use **Edit Cloudflare Workers** template
-4. Configure:
-   - **Account**: Your Cloudflare account
-   - **Zone**: `All zones` (or specific)
-   - **Permissions**: `Account > Cloudflare Pages > Edit`
-5. Copy the token (format: 40-character alphanumeric string)
-
-### 3. Get Your Cloudflare Account ID
-
-1. Visit: https://dash.cloudflare.com
-2. Select your domain/account
-3. Copy **Account ID** from right sidebar (format: 32-character hex string)
-
----
-
-## GitHub Secrets Configuration
-
-After forking, go to your repo: **Settings > Secrets and variables > Actions**
-
-Add the following secrets:
-
-| Secret Name             | Value           | Source                |
-| ----------------------- | --------------- | --------------------- |
-| `CLOUDFLARE_ACCOUNT_ID` | Your Account ID | Cloudflare Dashboard  |
-| `CLOUDFLARE_API_TOKEN`  | Your API Token  | Cloudflare API Tokens |
-
-Optional secrets:
-| Secret Name | Value |
-|-------------|-------|
-| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | `G-XXXXXXXXXX` |
-| `GA_MEASUREMENT_ID` | Your GA Measurement ID |
-
----
-
-## Initial Push to Your Fork
-
-After forroring, run these commands:
-
-```bash
-# Navigate to your project
-cd /Volumes/SSD/dev/new/awesome-mac
-
-# Add your fork as remote (replace if needed)
-git remote add myfork https://github.com/browerscan/awesome-mac.git
-
-# Push to your fork's master branch
-git push myfork master -u
-
-# Or if you want to force push (be careful!)
-# git push myfork master -f --no-verify
+```
+Build command: npm run build:data && npm run build:web
+Build output directory: .next
+Root directory: (leave empty)
 ```
 
+### 3. 环境变量（可选）
+
+```
+NODE_ENV = production
+NEXT_PUBLIC_GA_MEASUREMENT_ID = G-XXXXXXXXXX
+```
+
+### 4. 部署
+
+点击 **Save and Deploy**，Cloudflare 会自动：
+
+- 构建项目
+- 部署到全球 CDN
+- 分配域名: `https://awesome-mac.pages.dev`
+
 ---
 
-## Verify GitHub Actions Workflow
+## 方式二：使用 Wrangler CLI
 
-1. Visit: https://github.com/browerscan/awesome-mac/actions
-2. You should see **Deploy to Cloudflare Pages** workflow
-3. On push to `master`, deployment starts automatically
-
----
-
-## Local Deployment with Wrangler
+### 安装 Wrangler
 
 ```bash
-# Install wrangler globally
 npm install -g wrangler
+```
 
-# Login to Cloudflare
+### 登录
+
+```bash
 wrangler login
+```
 
-# Build for Cloudflare
+### 本地构建并部署
+
+```bash
+# 构建
 npm run build:cloudflare
 
-# Deploy manually
+# 部署
 wrangler pages deploy .next --project-name=awesome-mac
 ```
 
 ---
 
-## Environment Variables
+## 项目已创建
 
-Create `wrangler.toml` locally (NOT in git):
+- **项目名称**: awesome-mac
+- **预览域名**: https://awesome-mac.pages.dev
 
-```toml
-name = "awesome-mac"
-compatibility_date = "2024-01-01"
-pages_build_output_dir = ".next"
+---
 
-[build]
-command = "npm run build:cloudflare"
-cwd = "."
+## GitHub Actions (可选)
 
-[env.production]
-vars = { NODE_ENV = "production" }
+当前配置因 API token 权限问题暂时无法使用。如需启用：
 
-[compatibility_flags]
-nodejs_compat = true
-```
+1. 访问 Cloudflare Dashboard > My Profile > API Tokens
+2. 创建新 token，权限包括：
+   - Account > Cloudflare Pages > Edit
+   - Account > Account Settings > Read
+3. 更新 GitHub Secret: `CLOUDFLARE_API_TOKEN`
 
-Or use environment variable:
+---
+
+## 故障排除
+
+### 构建失败
 
 ```bash
-export CLOUDFLARE_ACCOUNT_ID="your-account-id"
-wrangler pages deploy .next --project-name=awesome-mac
+# 本地测试构建
+npm run build:web
 ```
 
----
+### Token 权限错误
 
-## Deployment URLs
+- 确保账号 ID 正确
+- 确保 token 有 Cloudflare Pages 编辑权限
 
-After successful deployment:
+### 文件大小超过 25MB
 
-- **Preview**: `https://awesome-mac.pages.dev`
-- **Custom Domain**: Configure in Cloudflare Dashboard > Pages > Custom Domains
-
----
-
-## Troubleshooting
-
-### Build Fails
-
-```bash
-# Test build locally
-npm run build:cloudflare
-```
-
-### Token Issues
-
-- Verify token has **Cloudflare Pages > Edit** permission
-- Regenerate token if expired
-
-### Account ID Not Found
-
-- Check `CLOUDFLARE_ACCOUNT_ID` secret in GitHub
-- Should be 32-character hex string
-
----
-
-## Security Notes
-
-- ✅ `wrangler.toml` is in `.gitignore`
-- ✅ Secrets stored in GitHub Secrets (not in code)
-- ✅ No tokens exposed in workflow files
-- ✅ Account ID from environment variable
-
----
-
-## Clean Remote URL (Remove Token)
-
-After initial setup, remove token from remote URL:
-
-```bash
-git remote set-url myfork https://github.com/browerscan/awesome-mac.git
-```
-
-Future pushes will use GitHub SSH key or credential helper.
+- Cloudflare Pages 单文件限制 25MB
+- 检查 .next 目录是否包含缓存文件
