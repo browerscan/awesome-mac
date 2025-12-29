@@ -7,14 +7,14 @@ body:
     attributes:
       value: |
         NOTE: Each discrete (stand-alone) request should be in its own issue.
-      
+
   - type: textarea
     attributes:
       label: 😳 Explain why it should be removed
       description: A clear and concise description of why it should be removed from this list.
     validations:
       required: true
-      
+
   - type: textarea
     attributes:
       label: 📖 Additional context

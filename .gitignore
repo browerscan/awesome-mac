@@ -4,15 +4,30 @@ dist/*.json
 dist
 npm-debug.log*
 package-lock.json
+.npm-cache/
+.next/
+out/
+data/
+public/media/
+.env
+.env.local
+.env.*.local
 
+# Cloudflare - NEVER commit wrangler.toml (contains account_id)
+wrangler.toml
+.wrangler/
+.cloudflare/
+
+# OS
 .DS_Store
 .cache
 .rdoc-dist
 .vscode
 
+# Temp files
 *.bak
 *.tem
 *.temp
-#.swp
+*.swp
 *.*~
 ~*.*

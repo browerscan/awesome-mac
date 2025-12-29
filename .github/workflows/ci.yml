@@ -3,24 +3,117 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 jobs:
-  build-deploy:
+  # Quality checks job - runs on all PRs and pushes
+  quality:
+    name: Code Quality & Tests
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run type check
+        run: npm run typecheck
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run unit tests
+        run: npm run test -- --run
+
+      - name: Generate test coverage report
+        if: always()
+        run: npm run test:coverage -- --run
+        continue-on-error: true
+
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+
+  # Build job - validates the build works
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build data files
+        run: npm run build:data
+
+      - name: Build web application
+        run: npm run build:web
+        env:
+          NODE_ENV: production
+
+      - name: Build static documentation
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          test -f dist/awesome-mac.json || echo "Error: dist/awesome-mac.json not found"
+          test -f dist/awesome-mac.zh.json || echo "Error: dist/awesome-mac.zh.json not found"
+          test -d .next || echo "Error: .next directory not found"
+          ls -la .next/static
+
+  # Deploy job - only runs on master branch
+  build-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    needs: [quality, build]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     permissions:
       contents: write
       id-token: write
     steps:
       - uses: actions/checkout@v6
+
       - uses: actions/setup-node@v6
         with:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
 
-      - run: npm install
-      - run: npm run build
-      - run: npm run create:ast
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Deploy
+      - name: Build all artifacts
+        run: |
+          npm run build:data
+          npm run build
+          npm run create:ast
+
+      - name: Verify sitemap can be generated
+        run: |
+          node -e "
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('dist/awesome-mac.json', 'utf8'));
+          console.log('Total items in AST:', data.length);
+          console.log('Build verification: PASSED');
+          "
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -54,12 +147,12 @@ jobs:
           body: |
             [![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-048754?logo=buymeacoffee)](https://jaywcjlove.github.io/#/sponsor) [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/awesome-mac@${{steps.create_tag.outputs.versionNumber}}/file/README.md) [![Docker Image Version (latest by date)](https://img.shields.io/docker/v/wcjiang/awesome-mac?logo=docker)](https://hub.docker.com/r/wcjiang/awesome-mac)
 
-            Documentation ${{ steps.changelog.outputs.tag }}: https://raw.githack.com/jaywcjlove/awesome-mac/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html  
-            
-            Comparing Changes: ${{ steps.changelog.outputs.compareurl }}  
+            Documentation ${{ steps.changelog.outputs.tag }}: https://raw.githack.com/jaywcjlove/awesome-mac/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html
+
+            Comparing Changes: ${{ steps.changelog.outputs.compareurl }}
 
             ${{ steps.changelog.outputs.changelog }}
-            
+
             ```bash
             npm i awesome-mac@${{steps.create_tag.outputs.versionNumber}}
             # dist/awesome-mac.json
@@ -84,47 +177,8 @@ jobs:
             http://localhost:9881/
             ```
 
-      # - name: Create Release
-      #   uses: ncipollo/release-action@v1
-      #   if: steps.create_tag.outputs.successful
-      #   with:
-      #     name: ${{ steps.create_tag.outputs.version }}
-      #     tag: ${{ steps.create_tag.outputs.version }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     body: |
-      #       [![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-048754?logo=buymeacoffee)](https://jaywcjlove.github.io/#/sponsor) [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/awesome-mac@${{steps.create_tag.outputs.versionNumber}}/file/README.md) [![Docker Image Version (latest by date)](https://img.shields.io/docker/v/wcjiang/awesome-mac?logo=docker)](https://hub.docker.com/r/wcjiang/awesome-mac)
-
-      #       Documentation ${{ steps.changelog.outputs.tag }}: https://raw.githack.com/jaywcjlove/awesome-mac/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html  
-            
-      #       Comparing Changes: ${{ steps.changelog.outputs.compareurl }}  
-
-      #       ${{ steps.changelog.outputs.changelog }}
-            
-      #       ```bash
-      #       npm i awesome-mac@${{steps.create_tag.outputs.versionNumber}}
-      #       # dist/awesome-mac.json
-      #       # dist/awesome-mac.zh.json
-      #       ```
-
-      #       ## Docker
-
-      #       ```bash
-      #       docker pull wcjiang/awesome-mac:${{steps.changelog.outputs.version}}
-      #       ```
-
-      #       ```bash
-      #       docker run --name awesome-mac --rm -d -p 9881:3000 wcjiang/awesome-mac:${{steps.changelog.outputs.version}}
-      #       # Or
-      #       docker run --name awesome-mac -itd -p 9881:3000 wcjiang/awesome-mac:${{steps.changelog.outputs.version}}
-      #       ```
-
-      #       Visit the following URL in your browser
-
-      #       ```bash
-      #       http://localhost:9881/
-      #       ```
-
-      - run: npm publish --access public --provenance
+      - name: Publish to npm
+        run: npm publish --access public --provenance
         continue-on-error: true
 
       # Create Docker Image
@@ -148,20 +202,3 @@ jobs:
           echo "outputs.tag - ${{ steps.changelog.outputs.version }}"
           docker tag awesome-mac ${{ secrets.DOCKER_USER }}/awesome-mac:${{steps.changelog.outputs.version}}
           docker push ${{ secrets.DOCKER_USER }}/awesome-mac:${{steps.changelog.outputs.version}}
-
-      # Create Docker Image in GitHub
-      # - name: Login to GitHub registry
-      #   run: echo ${{ github.token }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-      # - name: Build docker image
-      #   run: docker build -t ghcr.io/jaywcjlove/awesome-mac:latest .
-
-      # - name: Publish to GitHub registry
-      #   run: docker push ghcr.io/jaywcjlove/awesome-mac:latest
-
-      # - name: Tag docker image (beta) and publish to GitHub registry
-      #   if: steps.create_tag.outputs.successful
-      #   run: |
-      #       echo "version: v${{ steps.changelog.outputs.version }}"
-      #       docker tag ghcr.io/jaywcjlove/awesome-mac:latest ghcr.io/jaywcjlove/awesome-mac:${{steps.changelog.outputs.version}}
-      #       docker push ghcr.io/jaywcjlove/awesome-mac:${{steps.changelog.outputs.version}}

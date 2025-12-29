@@ -1,0 +1,305 @@
+{
+  "common": {
+    "home": "首页",
+    "categories": "分类",
+    "allApps": "所有应用",
+    "apps": "应用",
+    "search": "搜索",
+    "github": "GitHub",
+    "viewOnGitHub": "在 GitHub 上查看",
+    "suggestAnApp": "推荐应用",
+    "language": "语言",
+    "english": "English",
+    "chinese": "中文",
+    "browseAll": "浏览全部",
+    "best": "最佳",
+    "freeAlternatives": "免费替代品",
+    "free": "免费",
+    "openSource": "开源",
+    "appStore": "App Store",
+    "compare": "比较"
+  },
+  "header": {
+    "title": "Awesome Mac",
+    "toggleDarkMode": "切换深色模式",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单"
+  },
+  "footer": {
+    "dataSourcedFrom": "数据来源",
+    "byAuthor": "作者",
+    "builtWith": "基于 Next.js 和 PayloadCMS 构建"
+  },
+  "home": {
+    "hero": {
+      "beforeGradient": "探索",
+      "gradient": "精选",
+      "afterGradient": "Mac 应用",
+      "title": "探索{gradient} Mac 应用",
+      "description": "为开发者和设计师精心策划的最佳 Mac 应用程序和工具集合。发现按分类整理的开源、免费和付费应用。"
+    },
+    "stats": {
+      "totalApps": "应用总数",
+      "openSource": "开源",
+      "freeApps": "免费应用",
+      "categories": "分类"
+    },
+    "browseByCategory": {
+      "title": "按分类浏览",
+      "viewAll": "查看所有分类",
+      "viewAllCount": "查看全部 {count} 个分类"
+    },
+    "featured": {
+      "title": "精选开源应用",
+      "subtitle": "社区喜爱的免费开源应用程序",
+      "viewAll": "查看所有开源"
+    },
+    "contribute": {
+      "title": "贡献 Awesome Mac",
+      "description": "知道优秀的 Mac 应用应该添加到此列表吗？awesome-mac 项目是开源的，欢迎社区贡献。"
+    }
+  },
+  "categories": {
+    "title": "分类",
+    "subtitle": "按分类和子分类浏览应用。"
+  },
+  "apps": {
+    "title": "应用",
+    "showing": "显示 {total} 个应用中的 {count} 个",
+    "inCategory": "在 {category} 中",
+    "filters": {
+      "all": "全部",
+      "openSource": "开源",
+      "free": "免费",
+      "appStore": "App Store",
+      "category": "分类"
+    },
+    "pagination": {
+      "prev": "上一页",
+      "next": "下一页",
+      "page": "第 {current} / {total} 页"
+    },
+    "noApps": "没有符合当前筛选条件的应用。"
+  },
+  "category": {
+    "appsInCategory": "此分类中有 {count} 个应用",
+    "appsInCategory_plural": "此分类中有 {count} 个应用",
+    "subcategories": "子分类",
+    "noApps": "此分类中没有找到应用。",
+    "browseAll": "浏览所有分类"
+  },
+  "app": {
+    "noDescription": "暂无描述。",
+    "visitWebsite": "访问网站",
+    "appStore": "App Store",
+    "viewSource": "查看源码",
+    "category": "分类",
+    "screenshots": "截图",
+    "relatedApps": "相关应用",
+    "badges": {
+      "free": "免费",
+      "openSource": "开源",
+      "appStore": "App Store",
+      "awesomeList": "精选列表"
+    }
+  },
+  "compare": {
+    "meta": {
+      "title": "{appNames} 比较",
+      "description": "并排比较 {appNames}。为您的需求找到最佳应用。",
+      "invalidTitle": "无效的比较",
+      "invalidDescription": "请选择 2-4 个应用进行比较。",
+      "notFoundTitle": "未找到应用",
+      "notFoundDescription": "一个或多个应用无法找到。"
+    },
+    "breadcrumb": "比较",
+    "hero": {
+      "description": "看看这些应用如何相互比较。"
+    },
+    "title": {
+      "two": "{app1} vs {app2}",
+      "multiple": "比较 {count} 个应用"
+    },
+    "table": {
+      "feature": "功能"
+    },
+    "features": {
+      "free": "免费",
+      "openSource": "开源",
+      "appStore": "App Store",
+      "category": "分类"
+    },
+    "yes": "是",
+    "no": "否",
+    "sections": {
+      "details": "应用详情",
+      "moreInCategory": "{category} 中的更多"
+    },
+    "invalid": {
+      "title": "无效的比较",
+      "description": "您一次可以比较 2 到 4 个应用。",
+      "browseApps": "浏览应用"
+    },
+    "noDescription": "暂无描述。",
+    "visitWebsite": "访问网站",
+    "pageDescription": "比较 {appNames} 以找到最适合您需求的应用。",
+    "lookingForMore": "想要更多选择？",
+    "viewAllInCategory": "查看 {category} 中的全部"
+  },
+  "search": {
+    "placeholder": "搜索应用...",
+    "noResults": "未找到 \"{query}\" 的结果",
+    "tryDifferent": "尝试不同的搜索词"
+  },
+  "best": {
+    "meta": {
+      "title": "最佳 {category} Mac 应用",
+      "description": "发现最佳的 {category} Mac 应用。精心挑选的推荐，最大程度提升生产力。"
+    },
+    "breadcrumb": "最佳",
+    "badge": "编辑推荐",
+    "title": "最佳 {category} 应用",
+    "hero": {
+      "description": "精心挑选的应用，提供卓越的体验和价值。"
+    },
+    "topPicks": "首选推荐",
+    "noApps": "此分类中没有找到应用。",
+    "subcategories": "{category} 子分类",
+    "links": {
+      "viewAll": "查看所有 {category} 应用",
+      "freeAlternatives": "免费替代品"
+    },
+    "content": {
+      "guideTitle": "如何选择合适的 {category} 应用",
+      "intro": "在众多选项中选择合适的 {category} Mac 应用可能令人不知所措。本指南帮助您找到完美适合您需求的工具。",
+      "whatToLookFor": {
+        "title": "选择标准",
+        "nativeExperience": "原生 macOS 体验，具有适当的键盘快捷键和手势",
+        "regularUpdates": "定期更新，修复错误并添加新功能",
+        "userReviews": "积极的用户评价和活跃的社区支持",
+        "freeTrials": "免费试用或演示版本，购买前可先测试",
+        "privacy": "强大的隐私政策和数据保护实践"
+      },
+      "freeVsPaid": {
+        "title": "免费与付费选项",
+        "description": "虽然付费 {category} 应用通常提供更多功能和支持，但免费替代品也能令人惊讶地强大。请考虑您的预算和使用频率。"
+      }
+    }
+  },
+  "freeAlternatives": {
+    "meta": {
+      "title": "{appName} 的免费替代品 Mac",
+      "description": "发现 {appName} 的免费和开源替代品 Mac 版。节省费用同时获得强大功能。",
+      "alreadyFreeTitle": "{appName} 已经是免费应用！",
+      "alreadyFreeDescription": "{appName} 已经是免费应用。查看下面的其他免费替代品。"
+    },
+    "breadcrumb": "免费替代品",
+    "pageTitle": "{appName} 的免费替代品",
+    "pageDescription": "为您的 Mac 找到 {appName} 的免费和开源替代品。",
+    "title": {
+      "paidApp": "{appName} 的免费替代品",
+      "alreadyFree": "{appName} 已经是免费的！"
+    },
+    "hero": {
+      "paidApp": "发现可以替代 {appName} 的免费应用，无需花费金钱。",
+      "alreadyFree": "这个应用已经是免费的！以下是一些您可能喜欢的其他免费替代品。"
+    },
+    "paid": "付费",
+    "visitWebsite": "访问网站",
+    "sections": {
+      "freeAlternatives": "免费替代品",
+      "ossAlternatives": "开源替代品"
+    },
+    "noAlternatives": "未找到此应用的免费替代品。",
+    "browseAllFree": "浏览所有免费应用",
+    "content": {
+      "whyTitle": "为什么要考虑 {appName} 的免费替代品？",
+      "intro": "虽然 {appName} 可能是一个受欢迎的选择，但有许多免费替代品可以提供类似的功能而无需付费。这些选项非常适合预算有限的用户或更喜欢开源软件的用户。",
+      "benefitsTitle": "免费替代品的优势",
+      "benefits": {
+        "noFees": "无订阅费或一次性付款",
+        "transparency": "开源代码允许透明度和安全审计",
+        "communitySupport": "活跃的社区支持和定期更新",
+        "noLockIn": "无供应商锁定或专有格式",
+        "regularUpdates": "社区提供的频繁更新和功能添加"
+      },
+      "howToChooseTitle": "如何选择合适的替代品",
+      "howToChoose": "选择 {appName} 的免费替代品时，请考虑易用性、功能对等性、社区活动和文档质量等因素。许多免费替代品提供独特的功能，可能更适合您的特定需求。"
+    },
+    "links": {
+      "allOssApps": "所有开源应用",
+      "moreCategory": "{category} 中的更多"
+    }
+  },
+  "favorites": {
+    "title": "我的收藏",
+    "description": "查看和管理您收藏的 Mac 应用"
+  },
+  "free": {
+    "meta": {
+      "title": "免费 Mac 应用",
+      "description": "发现最佳免费 Mac 应用程序和工具。无需付费，高质量的生产力软件。"
+    },
+    "title": "免费 Mac 应用",
+    "hero": {
+      "description": "有 {count} 款免费 Mac 应用可供下载。这些应用无需付费，但功能强大。",
+      "note": "此处列出的所有应用均可免费使用。部分应用可能提供额外功能的有偿升级。"
+    },
+    "links": {
+      "openSource": "开源应用",
+      "browseAll": "浏览所有应用"
+    },
+    "categories": {
+      "title": "按分类查看免费应用"
+    },
+    "apps": "{count} 个应用",
+    "apps_plural": "{count} 个应用",
+    "content": {
+      "whyTitle": "为什么选择免费 Mac 应用？",
+      "intro": "免费 Mac 应用程序提供无与伦比的价值，无需前期成本。许多这些应用由充满热情的社区开发，或提供免费的高级软件版本。",
+      "benefitsTitle": "免费软件的优势",
+      "benefits": {
+        "noCost": "无需前期购买或订阅费用",
+        "tryBeforeBuy": "通过免费试用测试高级功能",
+        "opensource": "开源选项提供透明度和自定义能力",
+        "community": "活跃的社区支持和定期更新",
+        "lowCommitment": "尝试新软件时无财务风险"
+      }
+    }
+  },
+  "openSource": {
+    "meta": {
+      "title": "开源 Mac 应用",
+      "description": "发现最佳开源 Mac 应用程序。免费、透明、社区驱动的软件。"
+    },
+    "title": "开源 Mac 应用",
+    "hero": {
+      "description": "有 {count} 款开源 Mac 应用可供下载。这些应用免费、透明且由社区驱动。",
+      "note": "此处列出的所有应用均为源代码公开的开源软件。"
+    },
+    "links": {
+      "freeApps": "免费应用",
+      "browseAll": "浏览所有应用"
+    },
+    "categories": {
+      "title": "按分类查看开源应用"
+    },
+    "apps": "{count} 个项目",
+    "apps_plural": "{count} 个项目",
+    "content": {
+      "whyTitle": "为什么选择开源 Mac 应用？",
+      "intro": "开源应用程序提供透明度、安全性和修改软件的自由。这些项目由全球充满热情的社区维护。",
+      "benefitsTitle": "开源软件的优势",
+      "benefits": {
+        "transparency": "源代码公开可审计",
+        "security": "社区驱动的安全审计和快速错误修复",
+        "noLockIn": "无供应商锁定 - 您控制自己的数据",
+        "communityDriven": "功能开发由用户需求驱动",
+        "costEffective": "免费使用且具有企业级功能",
+        "longTerm": "软件独立于任何单一公司长期存在"
+      },
+      "licensesTitle": "开源许可证",
+      "licenses": "此处列出的多数应用使用宽松许可证，如 MIT、Apache 或 GPL，允许您自由使用、研究、修改和分发软件。"
+    }
+  }
+}

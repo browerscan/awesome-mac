@@ -1,0 +1,71 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "allowImportingTsExtensions": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@payload-config": ["./src/payload.config.ts"]
+    },
+    "baseUrl": ".",
+    // Stricter type checking options
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": false,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "exactOptionalPropertyTypes": false,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/app/**/*.ts",
+    "src/app/**/*.tsx",
+    "src/collections/**/*.ts",
+    "src/components/**/*.ts",
+    "src/components/**/*.tsx",
+    "src/constants/**/*.ts",
+    "src/hooks/**/*.ts",
+    "src/i18n/**/*.ts",
+    "src/lib/access.ts",
+    "src/lib/app-icon.ts",
+    "src/lib/cors.ts",
+    "src/lib/data.ts",
+    "src/lib/github-sync.ts",
+    "src/lib/parser.ts",
+    "src/lib/performance.ts",
+    "src/lib/rate-limit.ts",
+    "src/lib/search/**/*.ts",
+    "src/lib/security-headers.ts",
+    "src/lib/seo.ts",
+    "src/lib/slugify.ts",
+    "src/lib/sync.ts",
+    "src/lib/types.ts",
+    "src/lib/utils.ts",
+    "src/lib/validation.ts",
+    "src/middleware.ts",
+    "src/payload.config.ts",
+    "src/types/**/*.ts",
+    "tests/**/*.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules", "build", "dist", "coverage", ".next"]
+}

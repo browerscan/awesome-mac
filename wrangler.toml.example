@@ -1,0 +1,37 @@
+# Wrangler Configuration for Cloudflare Pages
+# Copy this file to wrangler.toml and fill in your values
+# wrangler.toml should NOT be committed to git (see .gitignore)
+
+# Project name (will create: https://your-project.pages.dev)
+name = "awesome-mac"
+compatibility_date = "2024-01-01"
+
+# Environment variable for account ID (set in CI/CD or local env)
+# CLOUDFLARE_ACCOUNT_ID = "your-account-id"
+
+# Pages configuration
+pages_build_output_dir = ".next"
+
+# Build configuration
+[build]
+command = "npm run build:cloudflare"
+cwd = "."
+watch_paths = ["src/**", "messages/**", "public/**"]
+
+# Production environment variables
+[env.production]
+vars = { NODE_ENV = "production" }
+
+# Preview environment variables
+[env.preview]
+vars = { NODE_ENV = "development" }
+
+# Compatibility flags for Next.js
+[compatibility_flags]
+nodejs_compat = true
+
+# Rules for routes (optional, for advanced routing)
+# [[rules]]
+# type = "Text"
+# globs = ["/**/*.html"]
+# fallthrough = true

@@ -1,6 +1,6 @@
 site: Awesome Mac
 
-description:  This repo is a collection of awesome Mac applications and tools for developers and designers. 
+description:  This repo is a collection of awesome Mac applications and tools for developers and designers.
 keywords: mac,osx,app,softwares,applications,mac softwares,awesome mac,free softwares,Freeware
 
 favicon: ./logo.svg
@@ -10,10 +10,10 @@ dir: ./doc
 
 menus:
   Home: index.html
-  Recommended: 
+  Recommended:
     url: https://github.com/jaywcjlove/awesome-mac/issues
     target: __blank
-  Link failure Report: 
+  Link failure Report:
     url: https://github.com/jaywcjlove/awesome-mac/issues
     target: __blank
 

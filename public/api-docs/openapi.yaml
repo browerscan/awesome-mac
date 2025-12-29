@@ -1,0 +1,403 @@
+openapi: 3.1.0
+info:
+  title: Awesome Mac API
+  description: |
+    API for accessing Awesome Mac application data, search functionality,
+    and analytics endpoints.
+
+    **Base URL:** `https://awesome-mac.com/api`
+
+    **Rate Limiting:** API endpoints are rate-limited to 60 requests per minute
+    per IP address by default.
+  version: 1.0.0
+  contact:
+    name: Awesome Mac
+    url: https://github.com/jaywcjlove/awesome-mac
+    email: wowohoo@qq.com
+  license:
+    name: CC-BY-SA-4.0
+    url: https://creativecommons.org/licenses/by-sa/4.0/
+
+servers:
+  - url: http://localhost:3000/api
+    description: Local development server
+  - url: https://awesome-mac.com/api
+    description: Production server
+
+tags:
+  - name: search
+    description: Search and discovery endpoints
+  - name: analytics
+    description: Analytics and performance monitoring endpoints
+  - name: health
+    description: Health check and status endpoints
+
+paths:
+  /search:
+    get:
+      tags:
+        - search
+      summary: Search for applications
+      description: |
+        Search for Mac applications by name, description, or category.
+        Returns paginated results with optional suggestions for zero-result queries.
+      operationId: searchApps
+      parameters:
+        - name: q
+          in: query
+          description: Search query string
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+          example: 'browser'
+        - name: limit
+          in: query
+          description: Number of results per page (max 50)
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+          example: 10
+        - name: page
+          in: query
+          description: Page number for pagination
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          example: 1
+      responses:
+        '200':
+          description: Successful search response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+              examples:
+                withResults:
+                  summary: Search with results
+                  value:
+                    q: 'browser'
+                    results:
+                      - id: 'chrome'
+                        slug: 'google-chrome'
+                        name: 'Google Chrome'
+                        description: 'Fast, secure, and free web browser'
+                        categoryId: 'browsers'
+                        categoryName: 'Browsers'
+                        isFree: true
+                        isOpenSource: false
+                        isAppStore: true
+                    pagination:
+                      page: 1
+                      limit: 10
+                      total: 15
+                      hasMore: true
+                    analytics:
+                      searchId: '550e8400-e29b-41d4-a716-446655440000'
+                      timestamp: '2024-01-15T10:30:00Z'
+                noResults:
+                  summary: Search with no results
+                  value:
+                    q: 'xyzapp'
+                    results: []
+                    pagination:
+                      page: 1
+                      limit: 10
+                      total: 0
+                      hasMore: false
+                    suggestions:
+                      - 'Xcode'
+                      - 'XYplorer'
+                    analytics:
+                      searchId: '550e8400-e29b-41d4-a716-446655440001'
+                      timestamp: '2024-01-15T10:30:00Z'
+        '400':
+          description: Bad request - invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Service unavailable - search index not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          headers:
+            Retry-After:
+              description: Suggested retry delay in seconds
+              schema:
+                type: integer
+                example: 60
+
+  /vitals:
+    get:
+      tags:
+        - analytics
+      summary: Get Web Vitals summary
+      description: |
+        Returns aggregated Web Vitals metrics for monitoring purposes.
+        This endpoint is intended for administrative/debug use.
+      operationId: getWebVitals
+      security: []
+      responses:
+        '200':
+          description: Web Vitals summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebVitalsSummary'
+        '401':
+          description: Unauthorized - invalid or missing credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - analytics
+      summary: Submit Web Vitals metric
+      description: |
+        Accepts Core Web Vitals metrics from client-side monitoring.
+        Metrics are aggregated and sent to Google Analytics.
+      operationId: submitWebVital
+      security: []
+      requestBody:
+        description: Web Vitals metric data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebVitalMetric'
+            example:
+              name: 'LCP'
+              value: 1234
+              rating: 'good'
+              delta: 50
+              id: 'v1-1234567890'
+              page: '/apps/google-chrome'
+      responses:
+        '204':
+          description: Metric accepted successfully
+        '400':
+          description: Bad request - missing required fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    SearchResponse:
+      type: object
+      required:
+        - q
+        - results
+        - pagination
+      properties:
+        q:
+          type: string
+          description: The search query that was executed
+        results:
+          type: array
+          description: Array of matching applications
+          items:
+            $ref: '#/components/schemas/AppSummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        suggestions:
+          type: array
+          description: Suggested search terms (only when no results found)
+          items:
+            type: string
+        analytics:
+          $ref: '#/components/schemas/SearchAnalytics'
+
+    AppSummary:
+      type: object
+      required:
+        - id
+        - slug
+        - name
+        - description
+        - categoryId
+        - categoryName
+        - isFree
+        - isOpenSource
+        - isAppStore
+      properties:
+        id:
+          type: string
+          description: Unique app identifier
+        slug:
+          type: string
+          description: URL-friendly app identifier
+        name:
+          type: string
+          description: App name
+        description:
+          type: string
+          description: App description
+        categoryId:
+          type: string
+          description: Primary category identifier
+        categoryName:
+          type: string
+          description: Primary category name
+        isFree:
+          type: boolean
+          description: Whether the app is free
+        isOpenSource:
+          type: boolean
+          description: Whether the app is open source
+        isAppStore:
+          type: boolean
+          description: Whether the app is available on App Store
+
+    Pagination:
+      type: object
+      required:
+        - page
+        - limit
+        - total
+        - hasMore
+      properties:
+        page:
+          type: integer
+          description: Current page number
+          minimum: 1
+        limit:
+          type: integer
+          description: Results per page
+          minimum: 1
+          maximum: 50
+        total:
+          type: integer
+          description: Total number of matching results
+          minimum: 0
+        hasMore:
+          type: boolean
+          description: Whether more results are available
+
+    SearchAnalytics:
+      type: object
+      required:
+        - searchId
+        - timestamp
+      properties:
+        searchId:
+          type: string
+          format: uuid
+          description: Unique identifier for this search
+        timestamp:
+          type: string
+          format: date-time
+          description: When the search was executed
+
+    WebVitalsSummary:
+      type: object
+      required:
+        - timestamp
+        - metrics
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: When the summary was generated
+        metrics:
+          type: object
+          description: Aggregated metrics by vital type
+          additionalProperties:
+            $ref: '#/components/schemas/MetricSummary'
+
+    MetricSummary:
+      type: object
+      required:
+        - count
+        - avgValue
+        - distribution
+      properties:
+        count:
+          type: integer
+          description: Number of metrics recorded
+          minimum: 0
+        avgValue:
+          type: number
+          description: Average metric value in milliseconds
+        distribution:
+          type: object
+          description: Distribution of metric ratings
+          required:
+            - good
+            - needsImprovement
+            - poor
+          properties:
+            good:
+              type: integer
+              description: Count of "good" rated metrics
+            needsImprovement:
+              type: integer
+              description: Count of "needs improvement" rated metrics
+            poor:
+              type: integer
+              description: Count of "poor" rated metrics
+
+    WebVitalMetric:
+      type: object
+      required:
+        - name
+        - value
+        - rating
+        - delta
+        - id
+        - page
+      properties:
+        name:
+          type: string
+          enum: [CLS, FID, FCP, LCP, TTFB, INP]
+          description: Type of Web Vitals metric
+        value:
+          type: number
+          description: Metric value in milliseconds (or unitless for CLS)
+        rating:
+          type: string
+          enum: [good, needs-improvement, poor]
+          description: Performance rating
+        delta:
+          type: number
+          description: Difference from previous value
+        id:
+          type: string
+          description: Unique metric identifier
+        page:
+          type: string
+          description: Page path where metric was measured
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          description: Error category/code
+        message:
+          type: string
+          description: Detailed error message
+        code:
+          type: string
+          description: Machine-readable error code
+          example: 'INDEX_UNAVAILABLE'
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for protected endpoints

@@ -1,0 +1,305 @@
+{
+  "common": {
+    "home": "Home",
+    "categories": "Categories",
+    "allApps": "All Apps",
+    "apps": "Apps",
+    "search": "Search",
+    "github": "GitHub",
+    "viewOnGitHub": "View on GitHub",
+    "suggestAnApp": "Suggest an App",
+    "language": "Language",
+    "english": "English",
+    "chinese": "Chinese",
+    "browseAll": "Browse All",
+    "best": "Best",
+    "freeAlternatives": "Free Alternatives",
+    "free": "Free",
+    "openSource": "Open Source",
+    "appStore": "App Store",
+    "compare": "Compare"
+  },
+  "header": {
+    "title": "Awesome Mac",
+    "toggleDarkMode": "Toggle dark mode",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "footer": {
+    "dataSourcedFrom": "Data sourced from",
+    "byAuthor": "by",
+    "builtWith": "Built with Next.js and PayloadCMS"
+  },
+  "home": {
+    "hero": {
+      "beforeGradient": "Discover",
+      "gradient": "Awesome",
+      "afterGradient": "Mac Apps",
+      "title": "Discover {gradient} Mac Apps",
+      "description": "A curated collection of the best Mac applications and tools for developers and designers. Find open source, free, and premium apps organized by category."
+    },
+    "stats": {
+      "totalApps": "Total Apps",
+      "openSource": "Open Source",
+      "freeApps": "Free Apps",
+      "categories": "Categories"
+    },
+    "browseByCategory": {
+      "title": "Browse by Category",
+      "viewAll": "View all categories",
+      "viewAllCount": "View all {count} categories"
+    },
+    "featured": {
+      "title": "Featured Open Source Apps",
+      "subtitle": "Free and open source applications loved by the community",
+      "viewAll": "View all open source"
+    },
+    "contribute": {
+      "title": "Contribute to Awesome Mac",
+      "description": "Know a great Mac app that should be on this list? The awesome-mac project is open source and welcomes contributions from the community."
+    }
+  },
+  "categories": {
+    "title": "Categories",
+    "subtitle": "Browse apps by category and subcategory."
+  },
+  "apps": {
+    "title": "Apps",
+    "showing": "Showing {count} of {total} apps",
+    "inCategory": "in {category}",
+    "filters": {
+      "all": "All",
+      "openSource": "Open Source",
+      "free": "Free",
+      "appStore": "App Store",
+      "category": "Category"
+    },
+    "pagination": {
+      "prev": "Prev",
+      "next": "Next",
+      "page": "Page {current} / {total}"
+    },
+    "noApps": "No apps match the current filters."
+  },
+  "category": {
+    "appsInCategory": "{count} app in this category",
+    "appsInCategory_plural": "{count} apps in this category",
+    "subcategories": "Subcategories",
+    "noApps": "No apps found in this category.",
+    "browseAll": "Browse all categories"
+  },
+  "app": {
+    "noDescription": "No description available.",
+    "visitWebsite": "Visit Website",
+    "appStore": "App Store",
+    "viewSource": "View Source",
+    "category": "Category",
+    "screenshots": "Screenshots",
+    "relatedApps": "Related Apps",
+    "badges": {
+      "free": "Free",
+      "openSource": "Open Source",
+      "appStore": "App Store",
+      "awesomeList": "Awesome List"
+    }
+  },
+  "search": {
+    "placeholder": "Search for apps...",
+    "noResults": "No results found for \"{query}\"",
+    "tryDifferent": "Try a different search term"
+  },
+  "compare": {
+    "meta": {
+      "title": "{appNames} Comparison",
+      "description": "Compare {appNames} side by side. Find the best app for your needs.",
+      "invalidTitle": "Invalid Comparison",
+      "invalidDescription": "Please select 2-4 apps to compare.",
+      "notFoundTitle": "Apps Not Found",
+      "notFoundDescription": "One or more apps could not be found."
+    },
+    "breadcrumb": "Compare",
+    "hero": {
+      "description": "See how these apps stack up against each other."
+    },
+    "title": {
+      "two": "{app1} vs {app2}",
+      "multiple": "Compare {count} Apps"
+    },
+    "table": {
+      "feature": "Feature"
+    },
+    "features": {
+      "free": "Free",
+      "openSource": "Open Source",
+      "appStore": "App Store",
+      "category": "Category"
+    },
+    "yes": "Yes",
+    "no": "No",
+    "sections": {
+      "details": "App Details",
+      "moreInCategory": "More in {category}"
+    },
+    "invalid": {
+      "title": "Invalid Comparison",
+      "description": "You can compare between 2 to 4 apps at a time.",
+      "browseApps": "Browse Apps"
+    },
+    "noDescription": "No description available.",
+    "visitWebsite": "Visit Website",
+    "pageDescription": "Compare {appNames} to find the best app for your needs.",
+    "lookingForMore": "Looking for more options?",
+    "viewAllInCategory": "View all in {category}"
+  },
+  "best": {
+    "meta": {
+      "title": "Best {category} Apps for Mac",
+      "description": "Discover the best {category} apps for Mac. Hand-picked recommendations for maximum productivity."
+    },
+    "breadcrumb": "Best",
+    "badge": "EDITOR'S CHOICE",
+    "title": "Best {category} Apps",
+    "hero": {
+      "description": "Hand-picked apps that deliver exceptional experience and value."
+    },
+    "topPicks": "Top Picks",
+    "noApps": "No apps found in this category.",
+    "subcategories": "{category} Subcategories",
+    "links": {
+      "viewAll": "View All {category} Apps",
+      "freeAlternatives": "Free Alternatives"
+    },
+    "content": {
+      "guideTitle": "How to Choose the Right {category} App",
+      "intro": "Choosing the right {category} app for your Mac can be overwhelming with so many options available. This guide helps you find the perfect tool for your needs.",
+      "whatToLookFor": {
+        "title": "What to Look For",
+        "nativeExperience": "Native macOS experience with proper keyboard shortcuts and gestures",
+        "regularUpdates": "Regular updates with bug fixes and new features",
+        "userReviews": "Positive user reviews and active community support",
+        "freeTrials": "Free trials or demo versions to test before buying",
+        "privacy": "Strong privacy policy and data protection practices"
+      },
+      "freeVsPaid": {
+        "title": "Free vs Paid Options",
+        "description": "While paid {category} apps often offer more features and support, free alternatives can be surprisingly capable. Consider your budget and how frequently you'll use the software."
+      }
+    }
+  },
+  "freeAlternatives": {
+    "meta": {
+      "title": "Free Alternatives to {appName} for Mac",
+      "description": "Discover free and open source alternatives to {appName} for Mac. Save money while still getting powerful features.",
+      "alreadyFreeTitle": "{appName} is Already Free!",
+      "alreadyFreeDescription": "{appName} is already a free application. Check out other free alternatives below."
+    },
+    "breadcrumb": "Free Alternatives",
+    "pageTitle": "Free Alternatives to {appName}",
+    "pageDescription": "Find free and open source alternatives to {appName} for your Mac.",
+    "title": {
+      "paidApp": "Free Alternatives to {appName}",
+      "alreadyFree": "{appName} is Already Free!"
+    },
+    "hero": {
+      "paidApp": "Discover free alternatives that can replace {appName} without breaking the bank.",
+      "alreadyFree": "This app is already free! Here are some other free alternatives you might like."
+    },
+    "paid": "Paid",
+    "visitWebsite": "Visit Website",
+    "sections": {
+      "freeAlternatives": "Free Alternatives",
+      "ossAlternatives": "Open Source Alternatives"
+    },
+    "noAlternatives": "No free alternatives found for this app.",
+    "browseAllFree": "Browse All Free Apps",
+    "content": {
+      "whyTitle": "Why Consider Free Alternatives to {appName}?",
+      "intro": "While {appName} may be a popular choice, there are many free alternatives available that can provide similar functionality without the cost. These options are perfect for budget-conscious users or those who prefer open source software.",
+      "benefitsTitle": "Benefits of Free Alternatives",
+      "benefits": {
+        "noFees": "No subscription fees or one-time payments",
+        "transparency": "Open source code allows for transparency and security audits",
+        "communitySupport": "Active community support and regular updates",
+        "noLockIn": "No vendor lock-in or proprietary formats",
+        "regularUpdates": "Frequent updates and feature additions from the community"
+      },
+      "howToChooseTitle": "How to Choose the Right Alternative",
+      "howToChoose": "When selecting a free alternative to {appName}, consider factors like ease of use, feature parity, community activity, and documentation quality. Many free alternatives offer unique features that may better suit your specific needs."
+    },
+    "links": {
+      "allOssApps": "All Open Source Apps",
+      "moreCategory": "More in {category}"
+    }
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "description": "View and manage your favorite Mac apps"
+  },
+  "free": {
+    "meta": {
+      "title": "Free Mac Apps",
+      "description": "Discover the best free Mac applications and tools. No cost, high quality software for your productivity."
+    },
+    "title": "Free Mac Apps",
+    "hero": {
+      "description": "{count} free Mac applications available for download. These apps cost nothing but deliver powerful features.",
+      "note": "All apps listed here are completely free to use. Some may offer paid upgrades for additional features."
+    },
+    "links": {
+      "openSource": "Open Source Apps",
+      "browseAll": "Browse All Apps"
+    },
+    "categories": {
+      "title": "Free Apps by Category"
+    },
+    "apps": "{count} app",
+    "apps_plural": "{count} apps",
+    "content": {
+      "whyTitle": "Why Choose Free Mac Apps?",
+      "intro": "Free Mac applications offer incredible value without the upfront cost. Many of these apps are developed by passionate communities or offer free tiers of premium software.",
+      "benefitsTitle": "Benefits of Free Software",
+      "benefits": {
+        "noCost": "No upfront purchase or subscription fees",
+        "tryBeforeBuy": "Test premium features through free trials",
+        "opensource": "Open source options for transparency and customization",
+        "community": "Active community support and regular updates",
+        "lowCommitment": "No financial risk when trying new software"
+      }
+    }
+  },
+  "openSource": {
+    "meta": {
+      "title": "Open Source Mac Apps",
+      "description": "Discover the best open source Mac applications. Free, transparent, and community-driven software for your Mac."
+    },
+    "title": "Open Source Mac Apps",
+    "hero": {
+      "description": "{count} open source Mac applications available for download. These apps are free, transparent, and community-driven.",
+      "note": "All apps listed here are open source software with publicly available code."
+    },
+    "links": {
+      "freeApps": "Free Apps",
+      "browseAll": "Browse All Apps"
+    },
+    "categories": {
+      "title": "Open Source Apps by Category"
+    },
+    "apps": "{count} project",
+    "apps_plural": "{count} projects",
+    "content": {
+      "whyTitle": "Why Choose Open Source Mac Apps?",
+      "intro": "Open source applications provide transparency, security, and the freedom to modify software. These projects are maintained by passionate communities worldwide.",
+      "benefitsTitle": "Benefits of Open Source Software",
+      "benefits": {
+        "transparency": "Source code is publicly available for audit",
+        "security": "Community-driven security audits and rapid bug fixes",
+        "noLockIn": "No vendor lock-in - you control your data",
+        "communityDriven": "Feature development driven by user needs",
+        "costEffective": "Free to use with enterprise-grade features",
+        "longTerm": "Software longevity independent from any single company"
+      },
+      "licensesTitle": "Open Source Licenses",
+      "licenses": "Most apps listed here use permissive licenses like MIT, Apache, or GPL, allowing you to use, study, modify, and distribute the software freely."
+    }
+  }
+}

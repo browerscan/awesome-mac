@@ -1,0 +1,49 @@
+# ============================================
+# Docker Compose for PostgreSQL
+# ============================================
+# Local development PostgreSQL database
+# Usage: docker-compose -f docker-compose.postgres.yml up -d
+# ============================================
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: awesome_mac_postgres
+    environment:
+      POSTGRES_USER: awesome_mac
+      POSTGRES_PASSWORD: awesome_mac_password
+      POSTGRES_DB: awesome_mac
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U awesome_mac']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Optional: pgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: awesome_mac_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@awesomemac.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - '5050:80'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    profiles:
+      - admin
+
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local

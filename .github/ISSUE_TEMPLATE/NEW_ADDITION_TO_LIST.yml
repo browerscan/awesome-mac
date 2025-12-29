@@ -12,25 +12,24 @@ body:
     attributes:
       label: 🪩 Provide a link to the proposed addition
       description: Place link here.
-      placeholder: | 
+      placeholder: |
         https://github.com/jaywcjlove/awesome-mac
         https://github.com/jaywcjlove/awesome-mac
         https://github.com/jaywcjlove/awesome-mac
     validations:
       required: true
-      
+
   - type: textarea
     attributes:
       label: 😳 Explain why it should be added
       description: A clear and concise description of why it should be added to this list.
     validations:
       required: true
-      
+
   - type: textarea
     attributes:
       label: 📖 Additional context
       description: Add any other context or screenshots about the feature request here.
-
 
   - type: checkboxes
     attributes:

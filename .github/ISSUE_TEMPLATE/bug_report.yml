@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        NOTE: Each discrete (stand-alone) request should be in its own issue.  
+        NOTE: Each discrete (stand-alone) request should be in its own issue.
 
   - type: textarea
     attributes:
@@ -44,5 +44,5 @@ body:
 
   - type: input
     attributes:
-      label: "💻 Desktop"
+      label: '💻 Desktop'
       placeholder: ex. `MacOS 13.0.1`

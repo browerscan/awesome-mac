@@ -15,7 +15,7 @@ body:
       placeholder: Ex. I'm always frustrated when [...]
     validations:
       required: true
-      
+
   - type: textarea
     attributes:
       label: Describe the solution you'd like
@@ -30,7 +30,6 @@ body:
     attributes:
       label: 📖 Additional contex
       description: Add any other context or screenshots about the feature request here.
-
 
   - type: checkboxes
     attributes:

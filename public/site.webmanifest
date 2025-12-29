@@ -1,0 +1,16 @@
+{
+  "name": "Awesome Mac Apps",
+  "short_name": "Awesome Mac",
+  "description": "Curated collection of awesome Mac applications for developers and designers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
