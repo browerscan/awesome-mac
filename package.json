@@ -14,7 +14,7 @@
     "build:web": "npm run build:data && next build",
     "build:prod": "npm run build:data && npm run build && STANDALONE_OUTPUT=true next build",
     "build:docker": "npm run build:data && STANDALONE_OUTPUT=true next build",
-    "build:cloudflare": "npm run build:data && next build && npx opennextjs-cloudflare build --skipNextBuild --skipWranglerConfigCheck",
+    "build:cloudflare": "npm run build:data && next build && npx opennextjs-cloudflare build --skipNextBuild",
     "start:web": "next start",
     "start:prod": "NODE_ENV=production next start",
     "create:ast": "node build/ast.mjs",
